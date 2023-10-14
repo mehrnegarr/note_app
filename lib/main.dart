@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:note_application/screens/add_task_screen.dart';
 import 'package:note_application/screens/home_screen.dart';
-
 import 'data/task.dart';
 import 'data/task_type.dart';
 import 'data/type_enum.dart';
 
 void main() async {
   await Hive.initFlutter();
-  var box = await Hive.openBox('names');
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(TaskTypeAdapter());
   Hive.registerAdapter(TaskTypeEnumAdapter());
   await Hive.openBox<Task>('taskBox');
-  runApp(Application());
+  runApp(const Application());
 }
 
 class Application extends StatelessWidget {
@@ -25,15 +22,15 @@ class Application extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'SM',
-        textTheme: TextTheme(
-          headline4: TextStyle(
+        textTheme: const TextTheme(
+          headlineMedium: TextStyle(
             fontFamily: 'GB',
             fontSize: 16,
             color: Colors.white,
           ),
         ),
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

@@ -1,10 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:msh_checkbox/msh_checkbox.dart';
 import 'package:note_application/screens/add_task_screen.dart';
 import 'package:note_application/widget/task_widget.dart';
-
 import '../data/task.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE5E5E5),
+      backgroundColor: const Color(0xffE5E5E5),
       body: Center(
         child: ValueListenableBuilder(
           valueListenable: taskBox.listenable(),
@@ -61,11 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => AddTaskScreen(),
+                builder: (context) => const AddTaskScreen(),
               ),
             );
           },
-          backgroundColor: Color(0xff18DAA3),
+          backgroundColor: const Color(0xff18DAA3),
           child: Image.asset('images/icon_add.png'),
         ),
       ),
@@ -74,10 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget getListItem(Task task) {
     return Dismissible(
-        key: UniqueKey(),
-        onDismissed: (direction) {
-          task.delete();
-        },
-        child: TaskWidget(task: task));
+      key: UniqueKey(),
+      onDismissed: (direction) {
+        task.delete();
+      },
+      child: TaskWidget(task: task),
+    );
   }
 }
